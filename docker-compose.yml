@@ -116,6 +116,30 @@ services:
     volumes:
       - ./build:/app/test/expo/features/fixtures/build
 
+  # TODO Rationalise the builder and builder-base options once refactor is complete
+  react-native-android-builder-base:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile.react-native-android-builder-base
+      args:
+        - REG_BASIC_CREDENTIAL
+        - REG_NPM_EMAIL
+    environment:
+      VERBOSE:
+      DEBUG:
+      BRANCH_NAME:
+      BUILDKITE:
+      REGISTRY_URL:
+      REACT_NATIVE_VERSION:
+      NOTIFIER_VERSION:
+    networks:
+      default:
+        aliases:
+          - maze-runner
+    volumes:
+      - ./build:/app/build
+      - ./test:/app/test
+
   react-native-android-builder:
     build:
       context: .
