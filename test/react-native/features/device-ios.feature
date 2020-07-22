@@ -26,6 +26,8 @@ Scenario: Handled JS error
   And the event "device.model" matches "^iPhone(\d|[,\.])+$"
   And the payload field "events.0.device.totalMemory" is greater than 0
 
+  And the event "metaData.device" is not null
+
 Scenario: Unhandled JS error
   When I run "DeviceJsUnhandledScenario" and relaunch the app
   And I configure Bugsnag for "DeviceJsUnhandledScenario"
@@ -52,6 +54,8 @@ Scenario: Unhandled JS error
   And the event "device.model" matches "^iPhone(\d|[,\.])+$"
   And the payload field "events.0.device.totalMemory" is greater than 0
 
+  And the event "metaData.device" is not null
+
 Scenario: Handled native error
   When I run "DeviceNativeHandledScenario"
   Then I wait to receive a request
@@ -76,6 +80,8 @@ Scenario: Handled native error
   And the event "device.modelNumber" is not null
   And the event "device.model" matches "^iPhone(\d|[,\.])+$"
   And the payload field "events.0.device.totalMemory" is greater than 0
+
+  And the event "metaData.device" is not null
 
 Scenario: Unhandled native error
   When I run "DeviceNativeUnhandledScenario" and relaunch the app
@@ -102,3 +108,5 @@ Scenario: Unhandled native error
   And the event "device.modelNumber" is not null
   And the event "device.model" matches "^iPhone(\d|[,\.])+$"
   And the payload field "events.0.device.totalMemory" is greater than 0
+
+  And the event "metaData.device" is not null

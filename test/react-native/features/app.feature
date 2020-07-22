@@ -25,6 +25,7 @@ Scenario: Handled JS error
   And the event "app.type" equals the platform-dependent string:
   | android | android |
   | ios     | iOS     |
+  And the event "metaData.app" is not null
 
 Scenario: Unhandled JS error
   When I run "AppJsUnhandledScenario" and relaunch the app
@@ -52,6 +53,7 @@ Scenario: Unhandled JS error
   And the event "app.type" equals the platform-dependent string:
   | android | android |
   | ios     | iOS   |
+  And the event "metaData.app" is not null
 
 Scenario: Handled native error
   When I run "AppNativeHandledScenario"
@@ -80,6 +82,7 @@ Scenario: Handled native error
   And the event "app.type" equals the platform-dependent string:
   | android | android |
   | ios     | iOS     |
+  And the event "metaData.app" is not null
 
 Scenario: Unhandled native error
   When I run "AppNativeUnhandledScenario" and relaunch the app
@@ -112,6 +115,7 @@ Scenario: Unhandled native error
   And the event "app.type" equals the platform-dependent string:
   | android | android |
   | ios     | iOS     |
+  And the event "metaData.app" is not null
 
 Scenario: Setting appType in configuration
   When I run "AppConfigAppTypeScenario"

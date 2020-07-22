@@ -24,6 +24,8 @@ Scenario: Handled JS error
   And the event "device.orientation" equals "portrait"
   And the event "device.time" is a timestamp
 
+  And the event "metaData.device" is not null
+
 Scenario: Unhandled JS error
   When I run "DeviceJsUnhandledScenario" and relaunch the app
   And I configure Bugsnag for "DeviceJsUnhandledScenario"
@@ -47,6 +49,8 @@ Scenario: Unhandled JS error
   And the event "device.freeMemory" is not null
   And the event "device.orientation" equals "portrait"
   And the event "device.time" is a timestamp
+
+  And the event "metaData.device" is not null
 
 Scenario: Handled native error
   When I run "DeviceNativeHandledScenario"
@@ -72,6 +76,8 @@ Scenario: Handled native error
   And the event "device.orientation" equals "portrait"
   And the event "device.time" is a timestamp
 
+  And the event "metaData.device" is not null
+
 Scenario: Unhandled native error
   When I run "DeviceNativeUnhandledScenario" and relaunch the app
   And I configure Bugsnag for "DeviceNativeUnhandledScenario"
@@ -95,3 +101,5 @@ Scenario: Unhandled native error
   And the event "device.freeMemory" is not null
   And the event "device.orientation" equals "portrait"
   And the event "device.time" is a timestamp
+
+  And the event "metaData.device" is not null
