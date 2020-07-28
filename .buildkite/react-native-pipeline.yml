@@ -176,6 +176,19 @@ steps:
     concurrency: 10
     concurrency_group: 'browserstack-app'
 
+  - label: ':ios: React-native 0.60 iOS 13'
+    plugins:
+      artifacts#v1.2.0:
+        download: "build/rn0.60.ipa"
+      docker-compose#v3.1.0:
+        run: react-native-maze-runner
+        use-aliases: true
+    env:
+      DEVICE_TYPE: "IOS_13"
+      APP_LOCATION: "build/rn0.60.ipa"
+    concurrency: 10
+    concurrency_group: 'browserstack-app'
+
   - label: ':android: React-native 0.63 Android 5'
     plugins:
       artifacts#v1.2.0:
@@ -289,6 +302,19 @@ steps:
         use-aliases: true
     env:
       DEVICE_TYPE: "IOS_12"
+      APP_LOCATION: "build/rn0.63.ipa"
+    concurrency: 10
+    concurrency_group: 'browserstack-app'
+
+  - label: ':ios: React-native 0.63 iOS 13'
+    plugins:
+      artifacts#v1.2.0:
+        download: "build/rn0.63.ipa"
+      docker-compose#v3.1.0:
+        run: react-native-maze-runner
+        use-aliases: true
+    env:
+      DEVICE_TYPE: "IOS_13"
       APP_LOCATION: "build/rn0.63.ipa"
     concurrency: 10
     concurrency_group: 'browserstack-app'
