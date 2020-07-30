@@ -8,6 +8,8 @@ Scenario: Setting metadata (JS)
   And the event "metaData.jsdata.some_data" equals "set via config"
   And the event "metaData.jsdata.some_more_data" equals "set via client"
   And the event "metaData.jsdata.even_more_data" equals "set via event"
+  And the event "metaData.jsdata.extra_data" is null
+  And the event "metaData.clear" is null
   And the payload field "events.0.metaData.jsarraydata.items" is an array with 3 elements
 
 Scenario: Setting metadata (native handled)
