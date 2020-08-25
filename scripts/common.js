@@ -26,7 +26,7 @@ module.exports = {
       branchName = process.env.BRANCH_NAME
     } else {
       console.log('Using local Git repo to determine branch name (environment BRANCH_NAME may also be used)')
-      branchName = this.run('git rev-parse --abbrev-ref HEAD').replace(/\//g, '-')
+      branchName = this.run('git rev-parse --abbrev-ref HEAD').replace(/[^(a-zA-Z0-9.\-)]/g, '-')
     }
 
     // Distinguish from local use
