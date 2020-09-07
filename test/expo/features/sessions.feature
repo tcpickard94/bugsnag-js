@@ -21,6 +21,7 @@ Scenario: Sessions can be automatically delivered
   And the payload field "notifier.version" is not null
   And the payload field "app" is not null
   And the payload field "device" is not null
+  And the payload field "device.id" is not null
   And the payload has a valid sessions array
 
 Scenario: Sessions can be manually delivered
