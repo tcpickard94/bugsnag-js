@@ -1,12 +1,12 @@
 #!
 
-set -e
 
 # Lets make sure the build folder was cleared out correctly
 rm -rf $BUILDKITE_BUILD_CHECKOUT_PATH/build/*
 cd test/expo/features/fixtures/test-app
 perl -0777 -i.original -pe "s/entitlements\\['aps-environment'\\] =[^;]+;//gs" node_modules/\@expo/xdl/build/detach/IosNSBundle.js
 perl -0777 -i.original -pe "s/entitlements\\['aps-environment'\\] =[^;]+;//gs" node_modules/turtle-cli/node_modules/\@expo/xdl/build/detach/IosNSBundle.js
+
 node_modules/.bin/turtle build:ios \
   -c ./app.json \
   --team-id $APPLE_TEAM_ID \
