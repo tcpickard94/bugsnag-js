@@ -17,15 +17,16 @@ let getDefaultConfiguration = () => { return {
   }
 }
 
-let getManualModeConfiguration = (apiKey) => { return {
-  apiKey: apiKey,
-  endpoints: {
-    notify: 'https://notify.bugsnag.com',
-    sessions: 'https://sessions.bugsnag.com'
-  },
-  autoTrackSessions: false
+let getManualModeConfiguration = (apiKey, endpoint) => { return {
+    apiKey: apiKey || '12312312312312312312312312312312',
+    endpoints: {
+      notify: endpoint || 'https://notify.bugsnag.com',
+      sessions: endpoint || 'https://sessions.bugsnag.com'
+    },
+    autoTrackSessions: false
+  }
 }
-}
+
 
 export default class App extends Component {
   constructor(props) {
@@ -33,7 +34,8 @@ export default class App extends Component {
     this.state = {
       currentScenario: '',
       scenarioMetaData: '',
-      manualApiKey: null
+      manualApiKey: null,
+      manualEndpoint: null,
     }
     console.log(`Available scenarios:\n  ${Object.keys(Scenarios).join('\n  ')}`)
   }
@@ -110,6 +112,9 @@ export default class App extends Component {
           <TextInput placeholder='API key'
                      style={styles.textInput}
                      onChangeText={this.setManualApiKey} />
+          <TextInput placeholder='Endpoint'
+                     style={styles.textInput}
+                     onChangeText={this.setManualEndpoint} />
         </View>
       </View>
     );
