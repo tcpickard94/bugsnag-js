@@ -52,12 +52,27 @@ export default class App extends Component {
     this.setState(() => ({ manualApiKey: newApiKey }))
   }
 
+  setManualEndpoint = newEndpoint => {
+    this.setState(() => ({ manualEndpoint: newEndpoint }))
+  }
+
+  getConfiguration = () => {
+    let configuration
+    if (this.state.manualApiKey || this.state.manualEndpoint) {
+      configuration = getManualModeConfiguration(this.state.manualApiKey, this.state.manualEndpoint)
+    }
+    else {
+      configuration = getDefaultConfiguration()
+    }
+    return configuration
+  }
+
   startScenario = async () => {
     console.log(`Running scenario: ${this.state.currentScenario}`)
     console.log(`  with MetaData: ${this.state.scenarioMetaData}`)
     let scenarioName = this.state.currentScenario
     let scenarioMetaData = this.state.scenarioMetaData
-    let configuration = getDefaultConfiguration()
+    let configuration = this.getConfiguration()
     let jsConfig = {}
     let scenario = new Scenarios[scenarioName](configuration, scenarioMetaData, jsConfig)
     console.log(`  with config: ${JSON.stringify(configuration)} (native) and ${JSON.stringify(jsConfig)} (js)`)
@@ -69,17 +84,8 @@ export default class App extends Component {
   startBugsnag = async () => {
     console.log(`Starting Bugsnag for scenario: ${this.state.currentScenario}`)
     console.log(`  with MetaData: ${this.state.scenarioMetaData}`)
-    let scenarioName = this.state.currentScenario
-    let scenarioMetaData = this.state.scenarioMetaData
-    let configuration
-    if (this.state.manualApiKey) {
-      configuration = getManualModeConfiguration(this.state.manualApiKey)
-    }
-    else {
-      configuration = getDefaultConfiguration()
-    }
+    let configuration = this.getConfiguration()
     let jsConfig = {}
-    let scenario = new Scenarios[scenarioName](configuration, scenarioMetaData, jsConfig)
     console.log(`  with config: ${JSON.stringify(configuration)} (native) and ${JSON.stringify(jsConfig)} (js)`)
     await NativeModules.BugsnagTestInterface.startBugsnag(configuration)
     Bugsnag.start(jsConfig)
